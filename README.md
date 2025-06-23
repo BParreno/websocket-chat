@@ -18,27 +18,35 @@ Se ha implementado la **Opción 2** de la actividad, que consiste en un Gateway 
 Sigue estos pasos para levantar el servidor y probar la funcionalidad del chat:
 
 1.  **Clonar el Repositorio (si no lo has hecho):**
+
     ```bash
     git clone [URL_DE_TU_REPOSITORIO_GITHUB]
     cd websocket-chat
     ```
+
     (Asegúrate de reemplazar `[URL_DE_TU_REPOSITORIO_GITHUB]` con la URL real de este repositorio, por ejemplo: `https://github.com/TuUsuario/websocket-chat-nestjs.git`)
 
 2.  **Instalar Dependencias:**
+
     ```bash
     npm install
     npm install @nestjs/platform-socket.io # Necesario para WebSockets
     ```
 
 3.  **Iniciar la Aplicación NestJS:**
+
     ```bash
     npm run start:dev
     ```
+
     El servidor NestJS se iniciará y escuchará las conexiones HTTP y WebSocket en `http://localhost:3000` y `ws://localhost:3000` respectivamente.
 
 4.  **Probar el Chat con un Cliente HTML:**
-    -   Crea un archivo llamado `chat-client.html` en tu escritorio o en cualquier ubicación conveniente.
-    -   Copia y pega el siguiente código HTML completo en `chat-client.html`:
+
+    * Asegúrate de que el archivo `chat-client.html` **está en la raíz del proyecto `websocket-chat`**.
+    * Abre el archivo `chat-client.html` directamente en tu navegador web (Chrome, Firefox, Edge, etc.).
+    * Abre múltiples pestañas o ventanas del mismo archivo para simular varios usuarios chateando.
+    * Escribe mensajes y observa cómo se envían y reciben en tiempo real en todas las ventanas.
 
     ```html
     <!DOCTYPE html>
@@ -160,4 +168,5 @@ Sigue estos pasos para levantar el servidor y probar la funcionalidad del chat:
     </html>
     ```
 
----
+¿Necesitas algo más?
+</immersive>
