@@ -167,6 +167,6 @@ Sigue estos pasos para levantar el servidor y probar la funcionalidad del chat:
     </body>
     </html>
     ```
-
-¿Necesitas algo más?
+* Puedes abrir varias pestañas o ventanas del mismo archivo para simular varios usuarios chateando.
+* **Escribe tu nombre de usuario, escribe mensajes en el campo de texto y haz clic en "Enviar" o presiona "Enter". Deberías ver los mensajes aparecer en las ventanas conectadas.**
 </immersive>
