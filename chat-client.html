@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat WebSocket NestJS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        #messages {
+            border: 1px solid #ddd;
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+        }
+        #messageInput {
+            width: calc(100% - 90px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+        #sendMessage {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #sendMessage:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+        }
+        .server-message {
+            color: gray;
+            font-style: italic;
+        }
+        input[type="text"]#senderName {
+            width: 150px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Chat Simple con NestJS WebSocket</h1>
+        <label for="senderName">Tu Nombre:</label>
+        <input type="text" id="senderName" value="Usuario" />
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Escribe un mensaje..." />
+        <button id="sendMessage">Enviar</button>
+    </div>
+
+    <script>
+        // Conéctate al servidor WebSocket de NestJS
+        const socket = io('http://localhost:3000'); // Asegúrate de que esta URL sea correcta
+
+        const messagesDiv = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        const senderNameInput = document.getElementById('senderName');
+
+        // Escucha mensajes del servidor
+        socket.on('message', (msg) => {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            if (msg.sender === 'Servidor') {
+                messageElement.classList.add('server-message');
+            }
+            messageElement.textContent = `${msg.sender}: ${msg.text}`;
+            messagesDiv.appendChild(messageElement);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll
+        });
+
+        // Envía un mensaje al servidor cuando se hace clic en el botón
+        sendMessageBtn.addEventListener('click', () => {
+            const text = messageInput.value;
+            const sender = senderNameInput.value.trim();
+            if (text.trim() !== '') {
+                socket.emit('chatMessage', { text, sender }); // Emite el evento 'chatMessage'
+                messageInput.value = ''; // Limpia el input
+            }
+        });
+
+        // También envía el mensaje al presionar Enter
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessageBtn.click();
+            }
+        });
+
+        // Opcional: Manejo de conexión/desconexión del cliente (para depuración)
+        socket.on('connect', () => {
+            console.log('Conectado al servidor WebSocket:', socket.id);
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Desconectado del servidor WebSocket.');
+        });
+    </script>
+</body>
+</html>
