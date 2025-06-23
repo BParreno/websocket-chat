@@ -43,7 +43,7 @@ Sigue estos pasos para levantar el servidor y probar la funcionalidad del chat:
 
 4.  **Probar el Chat con un Cliente HTML:**
 
-    * Abre el archivo **(en la raíz del proyecto)** directamente en tu navegador.
+    * Abre el archivo `chat-client.html` **(en la raíz del proyecto)** directamente en tu navegador.
     * Escribe tu nombre de usuario, escribe mensajes en el campo de texto y haz clic en "Enviar" o presiona "Enter". Deberías ver los mensajes aparecer en las ventanas conectadas..
     * (Puedes abrir varias pestañas o ventanas del mismo archivo para simular varios usuarios chateando).
 </immersive>
